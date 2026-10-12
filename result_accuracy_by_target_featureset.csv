@@ -1,0 +1,3 @@
+target_name,feature_set,n,accuracy
+DOWNSIDE_2PCT,BASE,250,0.744
+UPSIDE_2PCT,BASE_FULL,250,0.792

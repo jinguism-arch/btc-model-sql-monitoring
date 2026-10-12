@@ -1,0 +1,3 @@
+target_name,n,event_rate,always_predict_no_accuracy
+DOWNSIDE_2PCT,250,0.252,0.748
+UPSIDE_2PCT,250,0.208,0.792
