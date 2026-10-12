@@ -2,15 +2,17 @@
 
 
 
-SQL analysis of forward-validation predictions from a BTC 24h / 2% barrier
+SQL analysis of forward-validation predictions from a BTC 24-hour / 2% barrier
 
-prediction model (sample data only; the model itself is not included).
+prediction model. This repo contains sample data only; the model itself is not
+
+included.
 
 
 
 \## Tables
 
-\- predictions(timestamp, target\_name, feature\_set, probability, ...)
+\- predictions(timestamp, target, target\_name, feature\_set, probability, prediction\_source)
 
 \- outcomes(timestamp, target\_name, realized\_target)
 
@@ -26,7 +28,9 @@ prediction model (sample data only; the model itself is not included).
 
 4\. Duplicate-key data-quality check (HAVING)
 
-5\. Calibration buckets (probability vs observed hit rate)
+5\. Calibration buckets (predicted probability vs observed hit rate)
+
+6\. Base-rate vs accuracy (naive baseline comparison)
 
 
 
@@ -40,13 +44,27 @@ python run\_queries.py
 
 
 
-\## Findings (sample of 250 matured predictions per target)
+Results are printed and saved as result\_\*.csv files.
 
-\- Accuracy: 74.4% downside, 79.2% upside, but it varies a lot day to day.
+
+
+\## Findings (sample of 250 matured predictions per target, \~10 days)
+
+\- Accuracy: 74.4% downside, 79.2% upside.
+
+\- Baseline check: always predicting "no event" scores 74.8% (downside) and
+
+&#x20; 79.2% (upside), so accuracy alone shows no edge over the naive baseline.
+
+\- Rolling 7-day accuracy is unstable (downside fell from \~92% to \~62% in a
+
+&#x20; few days).
 
 \- Calibration is uneven: predicted probabilities do not rise smoothly with
 
-&#x20; observed event rates, so accuracy alone overstates predictive quality.
+&#x20; observed event rates.
 
 \- 48 recent predictions have no outcome yet (not matured); no duplicate keys.
+
+\- Small sample: findings are descriptive, not conclusive.
 
